@@ -17,7 +17,7 @@ module.exports = {
         });
     },
       // Get a single user
-  getSingleStudent(req, res) {
+  getSingleUser(req, res) {
     Student.findOne({ _id: req.params.userId })
       .select('-__v')
       .then(async (user) =>
