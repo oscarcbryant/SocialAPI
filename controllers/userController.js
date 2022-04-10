@@ -99,7 +99,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-    // Remove frined from a user
+    // Remove friend from a user
     removeFriend(req, res) {
         User.findOneAndUpdate(
           { _id: req.params.userId },

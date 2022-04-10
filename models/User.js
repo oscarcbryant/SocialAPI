@@ -17,13 +17,17 @@ const userSchema = new Schema(
        Thought: [{ type: Schema.Types.ObjectId,
                     ref: 'Thought'}],
 
-        Friends: [{ type: Schema.Types.ObjectId,
-                    ref: 'user' }],
+        friends: [
+            // { type: Schema.Types.ObjectId,
+            // ref: 'friendCount'}
+        ],
     },
     {
-        toJSON: {
+        toJSON: { 
             getters: false,
+            virtuals: true
         },
+        id: true
     }
 );
 
