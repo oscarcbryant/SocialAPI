@@ -57,27 +57,47 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
-// Create a reaction
-createReaction(req, res) {
-  Reaction.create(req.body)
-    .then((course) => res.json(course))
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).json(err);
-    });
-},
+// Post a reaction to a Thought
 
-// Delete a thought
-removeReaction(req, res) {
-  Reaction.findOneAndDelete({ _id: req.params.reactionId })
-    .then((reaction) =>
-      !reaction
-        ? res.status(404).json({ message: 'No course with that ID' })
-        : Reaction.deleteMany({ _id: { $in: reaction.thought.user } })
+createReaction(req, res) {
+  console.log('You are adding an reaction');
+  console.log(req.body);
+  Reaction.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $addToSet: { reactions: req.params.reactionsId } },
+    { runValidators: true, new: true },
+    console.log(req.params.userId)
+  )
+    .then((user) =>
+      !user
+        ? res
+            .json({ message: 'No user found with that ID :(' })
+        : res.json(user)
     )
-    .then(() => res.json({ message: 'Reaction, Thought and User deleted!' }))
     .catch((err) => res.status(500).json(err));
 },
+
+
+// createReaction(req, res) {
+//   Reaction.create(req.body)
+//     .then((course) => res.json(course))
+//     .catch((err) => {
+//       console.log(err);
+//       return res.status(500).json(err);
+//     });
+// },
+
+// // Delete a thought
+// removeReaction(req, res) {
+//   Reaction.findOneAndDelete({ _id: req.params.reactionId })
+//     .then((reaction) =>
+//       !reaction
+//         ? res.status(404).json({ message: 'No course with that ID' })
+//         : Reaction.deleteMany({ _id: { $in: reaction.thought.user } })
+//     )
+//     .then(() => res.json({ message: 'Reaction, Thought and User deleted!' }))
+//     .catch((err) => res.status(500).json(err));
+// },
 
 
 };

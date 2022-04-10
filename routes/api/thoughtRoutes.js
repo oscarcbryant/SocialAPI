@@ -22,7 +22,8 @@ const {
     .put(updateThought)
     .delete(removeThought);
 
-    router.route('/:thoughtId/reactions').post(createReaction).delete(removeReaction);
+    router.route('/:thoughtId/reactions').post(createReaction)
+    //.delete(removeReaction);
   
   module.exports = router;
   
