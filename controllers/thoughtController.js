@@ -59,33 +59,46 @@ module.exports = {
   
 // Post a reaction to a Thought
 
+// createReaction(req, res) {
+//   console.log('You are adding an reaction');
+//   console.log(req.body);
+//   Reaction.findOneAndUpdate(
+//     { _id: req.params.thoughtId },
+//     { $addToSet: { reactions: req.params.reactionsId } },
+//     { runValidators: true, new: true },
+//     console.log(req.params.thoughtId)
+//   )
+//     .then((user) =>
+//       !user
+//         ? res
+//             .json({ message: 'No thought found with that ID :(' })
+//         : res.json(user)
+//     )
+//     .catch((err) => res.status(500).json(err));
+// },
+
+
 createReaction(req, res) {
-  console.log('You are adding an reaction');
-  console.log(req.body);
-  Reaction.findOneAndUpdate(
-    { _id: req.params.userId },
-    { $addToSet: { reactions: req.params.reactionsId } },
-    { runValidators: true, new: true },
-    console.log(req.params.userId)
-  )
-    .then((user) =>
-      !user
-        ? res
-            .json({ message: 'No user found with that ID :(' })
-        : res.json(user)
-    )
-    .catch((err) => res.status(500).json(err));
+  Reaction.create(req.body)
+    .then((course) => res.json(course))
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json(err);
+    });
 },
 
-
-// createReaction(req, res) {
-//   Reaction.create(req.body)
-//     .then((course) => res.json(course))
-//     .catch((err) => {
-//       console.log(err);
-//       return res.status(500).json(err);
-//     });
-// },
+removeReaction(req, res) {
+  Reaction.findOneAndUpdate(
+    console.log(req.params.reactionId),
+    { _id: req.params.reactionId },
+    { $pull: { reaction: req.params.reactionId } },
+    { new: true },
+    ).then((user) => {
+      if (!user) res.status(404).json({ message: 'No user found with that ID :(' })
+      console.log(user)
+      res.json(user)
+    })
+  },
 
 // // Delete a thought
 // removeReaction(req, res) {
