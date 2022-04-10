@@ -90,7 +90,7 @@ createReaction(req, res) {
 removeReaction(req, res) {
   Reaction.findOneAndUpdate(
     console.log(req.params.reactionId),
-    { _id: req.params.reactionId },
+    { _id: req.params.thoughtId },
     { $pull: { reaction: req.params.reactionId } },
     { new: true },
     ).then((user) => {
