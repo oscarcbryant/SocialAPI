@@ -25,7 +25,7 @@ We have built an API for a social network web application where users can share 
 ## Video Walkthrough
 
 Since this application was build in Insomnia and we are not deploying an application, we have created a video walkthough that covers the homework assignment. 
-Click here for a link to the video walk through - 
+Click here for a link to the video walk through - https://drive.google.com/file/d/1e92L4GJHdgYMimWYzU0vCiE1xm6P6oBy/view
 
 ### Technologies used
 - Mongoose
